@@ -1,0 +1,21 @@
+class window.Gabrake
+  @trackedVersion: null
+  @customDimensionIndex: null
+
+  @report: (message, file, line, options) ->
+    options = {}
+
+    if Gabrake.customDimensionIndex
+      options["dimension#{Gabrake.customDimensionIndex}"] = Gabrake.trackedVersion
+
+    ga('send', 'event', 'Gabrake (JavaScript)', message, "#{file}:#{line}", options)
+
+    true
+
+  @inject: ->
+    window.onerror = Gabrake.report
+
+Gabrake.trackedVersion = <%= Gabrake.tracked_version ? "'#{Gabrake.tracked_version}'" : 'null' %>
+Gabrake.customDimensionIndex = <%= Gabrake.custom_dimension_index || 'null' %>
+
+Gabrake.inject()
