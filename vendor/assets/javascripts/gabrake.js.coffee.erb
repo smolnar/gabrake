@@ -10,8 +10,6 @@ class window.Gabrake
 
     ga('send', 'event', 'Gabrake (JavaScript)', message, "#{file}:#{line}", options)
 
-    true
-
   @inject: ->
     window.onerror = Gabrake.report
 
