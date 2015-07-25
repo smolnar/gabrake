@@ -39,13 +39,19 @@ module Gabrake
       end
 
       def label
-        "#{location.path.gsub(/\A#{::Rails.root}\//, '')}:#{location.lineno}" if location
+        "#{location.gsub(/\A#{::Rails.root}\//, '')}" if location
       end
 
       private
 
       def location
-        @location ||= @exception.backtrace_locations.try(:first)
+        return @location if @location
+
+        backtrace = @exception.backtrace.try(:first)
+
+        return unless backtrace
+
+        _, @location = *backtrace.match(/^(.+?:\d+)(|:in `.+')$/)
       end
     end
   end
