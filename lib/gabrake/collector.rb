@@ -51,7 +51,7 @@ module Gabrake
 
         return unless backtrace
 
-        _, @location = *backtrace.match(/^(.+?:\d+)/)
+        _, @location, _ = *backtrace.match(/\A(.+?:\d+):in/)
       end
     end
   end
