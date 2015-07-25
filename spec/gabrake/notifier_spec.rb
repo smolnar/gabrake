@@ -23,7 +23,7 @@ describe Gabrake::Notifier do
       }
 
       expect(Gabrake::Collector).to receive(:event_for).with(exception, context) { 'http://google.sk' }
-      expect(HTTParty).to receive(:get).with('http://google.sk', :'User-Agent' => 'Chrome')
+      expect(HTTParty).to receive(:get).with('http://google.sk', headers: { 'User-Agent' => 'Chrome' })
 
       notifier.deliver(exception, env: env)
     end
