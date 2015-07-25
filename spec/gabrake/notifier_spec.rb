@@ -13,7 +13,7 @@ describe Gabrake::Notifier do
         },
 
         'REQUEST_URI' => 'http://google.sk',
-        'User-Agent' => 'Chrome'
+        'HTTP_USER_AGENT' => 'Chrome'
       }
 
       context = {
@@ -23,7 +23,7 @@ describe Gabrake::Notifier do
       }
 
       expect(Gabrake::Collector).to receive(:event_for).with(exception, context) { 'http://google.sk' }
-      expect(HTTParty).to receive(:get).with('http://google.sk', 'User-Agent' => 'Chrome')
+      expect(HTTParty).to receive(:get).with('http://google.sk', :'User-Agent' => 'Chrome')
 
       notifier.deliver(exception, env: env)
     end

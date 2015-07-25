@@ -4,7 +4,7 @@ module Gabrake
       context   = Env.extract_context(env)
       event_url = Gabrake::Collector.event_for(exception, context)
 
-      HTTParty.get(URI.encode(event_url), env.slice('User-Agent'))
+      HTTParty.get(URI.encode(event_url), :'User-Agent' => env['HTTP_USER_AGENT'])
     end
 
     class Env
