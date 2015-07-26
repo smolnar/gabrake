@@ -4,6 +4,12 @@ Gabrake is a gem built on top of Google Analytics API and provides realtime serv
 
 Let's have a look.
 
+[Realtime Tracking by category](https://www.dropbox.com/s/k0bhpd1f90hhe6e/gabrake-realtime.png?dl=0)
+
+[Overview by error message and location](https://www.dropbox.com/s/hrmyy9cgo1jkclw/gabrake-overview.png?dl=0)
+
+[Overview by error message and browser](https://www.dropbox.com/s/q736nd92vzz5r4a/gabrake-overview-by-browser.png?dl=0)
+
 ## Installation
 
 Add this line to your application's Gemfile:
