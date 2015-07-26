@@ -1,6 +1,8 @@
-# Gabrake
+# Gabrake &mdash; Realtime Error Tracking with Google Analytics
 
-TODO: Delete this and the text above, and describe your gem
+Gabrake is a gem built on top of Google Analytics API and provides realtime server-side and client-side error tracking by using custom events. It uses a flexibility of Google Analytics API and handles server-side error server-side, without exposing any of your error messages or backtrace on client.
+
+Let's have a look.
 
 ## Installation
 
@@ -20,20 +22,67 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### 1. Set it up
 
-## Development
+Create an initializer `config/initializers/gabrake.rb` and add
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+Gabrake.tracking_id = 'YOUR GA TRACKING ID'
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+In your javascript do
+
+```coffeecript
+#= require gabrake/analytics # if you haven't required analytics tracking code somewhere else
+#= require gabrake
+```
+
+**Note**: *This library uses new analytics.js code &ndash; Universal Google Analytics. If you still have the old `_gaq` library and you use it (for tracking events and stuff), you have to [create a new property](http://stackoverflow.com/a/20690546/1691413) (get second tracking ID and use that one for Gabrake).*
+
+### 2. Track errors
+
+Go to Google Analytics page, hit **Real Time** > **Events** and track 'em.
+
+**Pro Tip:** *Gabrake errors have two categories &ndash; Gabrake (Rails) and Gabrake (JavaScript). Click on one of the category to filter out events and see error message (action) along with error backtrace location (label).*
+
+### 3. Analyze
+
+Wait couple minutes.
+
+1. Go to **Behaviour** > **Events** > **Overview**. 
+2. Click on one of the Gabrake categories. On top of table, choose primary dimension as **Event Action**. 
+3. Choose secondary dimension by your taste &mdash; *Event Label (backtrace location), Page, Browser,* &hellip;
+
+**Important**: *Make sure that the overview date includes TODAY! You'll save yourself a headache.*
+
+## Advanced
+
+### Tracking versions
+
+If you want to compare errors by app versions, you need create a custom dimension. 
+
+1. Go to **Admin** > Under **Property** tab (the big middle one) > hit **Custom Definitions** > **Custom Dimension** > create one.
+2. Write down the name and the index. 
+3. Set `Gabrake.custom_dimension_index = YOUR_INDEX`.
+3. Go to **Behaviour** > **Events** > **Overview**. Click category. Choose **Event Action**. Search for secondary dimension, by the name. Choose it.
+
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/gabrake.
-
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+### This code is free to use under the terms of the MIT license.
 
+Copyright (c) 2015 Samuel Molnár
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
