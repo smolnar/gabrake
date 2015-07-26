@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Simple Realtime Error Tracking and Statistics with Google Analytics'
   spec.description   = 'Simple Realtime Error Tracking and Statistics with Google Analytics'
-  spec.homepage      = 'htts://github.com/smolnar/gabrake'
+  spec.homepage      = 'https://github.com/smolnar/gabrake'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
@@ -25,6 +25,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rspec', '~> 3.0.0'
   spec.add_development_dependency 'pry'
 end
