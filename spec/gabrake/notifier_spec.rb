@@ -54,7 +54,6 @@ describe Gabrake::Notifier do
         expect(HTTParty).to receive(:get).with('http://google.sk', headers: { 'User-Agent' => 'Chrome' })
 
         notifier.deliver(exception, env: env)
-
       end
     end
   end
