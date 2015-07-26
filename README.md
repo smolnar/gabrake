@@ -59,7 +59,7 @@ Wait couple minutes.
 
 1. Go to **Behaviour** > **Events** > **Overview**. 
 2. Click on one of the Gabrake categories. On top of table, choose primary dimension as **Event Action**. 
-3. Choose secondary dimension by your taste &mdash; *Event Label (backtrace location), Page, Browser,* &hellip;
+3. Choose secondary dimension by your taste &mdash; *Event Label (backtrace location), Page, Browser.*
 
 **Important**: *Make sure that the overview date includes TODAY! You'll save yourself a headache.*
 
