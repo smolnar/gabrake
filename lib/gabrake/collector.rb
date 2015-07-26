@@ -11,7 +11,7 @@ module Gabrake
 
       params = {
         v:   context[:version],
-        dl:  context[:url],
+        dl:  CGI::escape(context[:url]),
         cid: context[:client_id],
         tid: Gabrake.tracking_id,
         t:   :event,

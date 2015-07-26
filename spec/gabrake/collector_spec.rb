@@ -2,20 +2,34 @@ require 'spec_helper'
 
 describe Gabrake::Collector do
   let(:collector) { described_class }
+  let(:exception) {
+    exception = Exception.new('Something went wrong')
+
+    exception.set_backtrace('app/models/post.rb:5:in `__method')
+
+    exception
+  }
 
   describe '.event_for' do
     it 'generates url for analytics event' do
       Gabrake.tracking_id = 'UA-0'
 
-      exception = Exception.new('Something went wrong')
       context = { client_id: 1, version: 2, url: 'http://google.sk' }
 
-      begin
-        raise exception
-      rescue Exception => exception
+      url = collector.event_for(exception, context)
+
+      expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/models/post.rb:5')
+    end
+
+    context 'with parametrized url' do
+      it 'correctly adds url as parameter' do
+        Gabrake.tracking_id = 'UA-0'
+
+        context = { client_id: 1, version: 2, url: 'http://google.sk?a=1&b=2' }
+
         url = collector.event_for(exception, context)
 
-        expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http://google.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=spec/gabrake/collector_spec.rb:14')
+        expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk%3Fa%3D1%26b%3D2&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/models/post.rb:5')
       end
     end
 
@@ -25,17 +39,11 @@ describe Gabrake::Collector do
         Gabrake.custom_dimension_index = 1
         Gabrake.tracked_version = "git version"
 
-        exception = Exception.new('Something went wrong')
         context = { client_id: 1, version: 2, url: 'http://google.sk' }
 
-        begin
-          raise exception
-        rescue Exception => exception
-          url = collector.event_for(exception, context)
+        url = collector.event_for(exception, context)
 
-          expect(url).to eql("http://www.google-analytics.com/collect?v=2&dl=http://google.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=spec/gabrake/collector_spec.rb:32&cd1=git version")
-
-        end
+        expect(url).to eql("http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/models/post.rb:5&cd1=git version")
       end
     end
 
