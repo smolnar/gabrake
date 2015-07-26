@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Samuel Molnar']
   spec.email         = ['molnar.samuel@gmail.com']
 
-  spec.summary       = 'Real-Time Error Tracking with Google Analytics'
-  spec.description   = 'Real-Time Error Tracking with Google Analytics'
+  spec.summary       = 'Simple Realtime Error Tracking and Statistics with Google Analytics'
+  spec.description   = 'Simple Realtime Error Tracking and Statistics with Google Analytics'
   spec.homepage      = 'htts://github.com/smolnar/gabrake'
   spec.license       = 'MIT'
 
