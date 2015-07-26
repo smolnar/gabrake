@@ -11,7 +11,7 @@ module Gabrake
 
       params = {
         v:   context[:version],
-        dl:  CGI::escape(context[:url]),
+        dl:  context[:url],
         cid: context[:client_id],
         tid: Gabrake.tracking_id,
         t:   :event,
@@ -22,7 +22,7 @@ module Gabrake
 
       params[:"cd#{Gabrake.custom_dimension_index}"] = Gabrake.tracked_version if Gabrake.custom_dimension_index
 
-      "#{URL}?#{params.map { |key, value| "#{key}=#{value}" }.join('&') }"
+      "#{URL}?#{params.map { |key, value| "#{key}=#{CGI::escape(value.to_s)}" }.join('&') }"
     end
 
     class Event

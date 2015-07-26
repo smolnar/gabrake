@@ -18,7 +18,7 @@ describe Gabrake::Collector do
 
       url = collector.event_for(exception, context)
 
-      expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/models/post.rb:5')
+      expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake+%28Rails%29&ea=Exception%3A+Something+went+wrong&el=app%2Fmodels%2Fpost.rb%3A5')
     end
 
     context 'with parametrized url' do
@@ -29,7 +29,7 @@ describe Gabrake::Collector do
 
         url = collector.event_for(exception, context)
 
-        expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk%3Fa%3D1%26b%3D2&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/models/post.rb:5')
+        expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk%3Fa%3D1%26b%3D2&cid=1&tid=UA-0&t=event&ec=Gabrake+%28Rails%29&ea=Exception%3A+Something+went+wrong&el=app%2Fmodels%2Fpost.rb%3A5')
       end
     end
 
@@ -43,7 +43,7 @@ describe Gabrake::Collector do
 
         url = collector.event_for(exception, context)
 
-        expect(url).to eql("http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/models/post.rb:5&cd1=git version")
+        expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake+%28Rails%29&ea=Exception%3A+Something+went+wrong&el=app%2Fmodels%2Fpost.rb%3A5&cd1=git+version')
       end
     end
 

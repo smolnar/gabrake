@@ -1,4 +1,5 @@
 require 'httparty'
+require 'cgi'
 require 'gabrake/version'
 require 'gabrake/rails'
 require 'gabrake/collector'
