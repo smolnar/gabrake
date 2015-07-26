@@ -10,6 +10,8 @@ Let's have a look.
 
 [Overview by error message and browser](https://www.dropbox.com/s/q736nd92vzz5r4a/gabrake-overview-by-browser.png?dl=0)
 
+Inspired by [garelic](https://github.com/jsuchal/garelic) &mdash; gem that tracks app performace by Google Analytics User Timing variables.
+
 ## Installation
 
 Add this line to your application's Gemfile:
