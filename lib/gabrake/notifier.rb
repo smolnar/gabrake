@@ -10,7 +10,8 @@ module Gabrake
     class Env
       def self.extract_context(env)
         cookies = env['action_dispatch.cookies']
-        _, version, client_id = *(cookies['_ga'] || 'GA1.1.1.1').match(/GA(\d+)\..+\.(\d+\.\d+)\z/)
+        default_client_id = "GA1.1.#{(rand() * 2147483647).to_i}.#{Time.now.to_i}"
+        _, version, client_id = *(cookies['_ga'] || default_client_id).match(/GA(\d+)\..+\.(\d+\.\d+)\z/)
 
         {
           version: version,
