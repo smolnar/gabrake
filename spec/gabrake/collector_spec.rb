@@ -21,6 +21,27 @@ describe Gabrake::Collector do
       expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/models/post.rb:5')
     end
 
+    context 'with assets exceptions' do
+      let(:exception) {
+        exception = Exception.new('Something went wrong')
+
+        exception.set_backtrace('app/assets/stylesheets/application.scss:5')
+
+        exception
+      }
+
+      it 'correctly handles exception format' do
+        Gabrake.tracking_id = 'UA-0'
+
+        context = { client_id: 1, version: 2, url: 'http://google.sk' }
+
+        url = collector.event_for(exception, context)
+
+        expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/assets/stylesheets/application.scss:5')
+
+      end
+    end
+
     context 'with parametrized url' do
       it 'correctly adds url as parameter' do
         Gabrake.tracking_id = 'UA-0'
