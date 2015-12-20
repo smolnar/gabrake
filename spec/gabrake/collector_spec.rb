@@ -38,7 +38,6 @@ describe Gabrake::Collector do
         url = collector.event_for(exception, context)
 
         expect(url).to eql('http://www.google-analytics.com/collect?v=2&dl=http%3A%2F%2Fgoogle.sk&cid=1&tid=UA-0&t=event&ec=Gabrake (Rails)&ea=Exception: Something went wrong&el=app/assets/stylesheets/application.scss:5')
-
       end
     end
 
