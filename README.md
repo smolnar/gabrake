@@ -6,6 +6,8 @@ Let's have a look.
 
 [Realtime Tracking by category](https://www.dropbox.com/s/k0bhpd1f90hhe6e/gabrake-realtime.png?dl=0)
 
+[JavaScript Tracking by messages](https://www.dropbox.com/s/8pa1j5vujcma9oq/gabrake-js.png?dl=0)
+
 [Overview by error message and location](https://www.dropbox.com/s/hrmyy9cgo1jkclw/gabrake-overview.png?dl=0)
 
 [Overview by error message and browser](https://www.dropbox.com/s/q736nd92vzz5r4a/gabrake-overview-by-browser.png?dl=0)
@@ -59,7 +61,7 @@ Wait couple minutes.
 
 1. Go to **Behaviour** > **Events** > **Overview**. 
 2. Click on one of the Gabrake categories. On top of table, choose primary dimension as **Event Action**. 
-3. Choose secondary dimension by your taste &mdash; *Event Label (backtrace location), Page, Browser,* &hellip;
+3. Choose secondary dimension by your taste &mdash; *Event Label (backtrace location), Page, Browser.*
 
 **Important**: *Make sure that the overview date includes TODAY! You'll save yourself a headache.*
 
