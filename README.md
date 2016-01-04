@@ -1,5 +1,7 @@
 # Gabrake &mdash; Realtime Error Tracking with Google Analytics
 
+[![Build Status](https://travis-ci.org/smolnar/gabrake.svg)](https://travis-ci.org/smolnar/gabrake)
+
 Gabrake is a gem built on top of Google Analytics API and provides realtime server-side and client-side error tracking by using custom events. It uses a flexibility of Google Analytics API and handles server-side error server-side, without exposing any of your error messages or backtrace on client.
 
 Let's have a look.
